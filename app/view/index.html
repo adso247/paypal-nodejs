@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Products</title>
+    </head>
+    <body>
+        <!-- Encabezado que dice "Products" -->
+        <h1>Products</h1>
+    
+        <!-- Botón de pago con el identificador 'checkout' -->
+        <button id="checkout">
+            <!-- Texto que se muestra en el botón: "Pay" -->
+            Pay
+        </button>
+    
+        <!-- Script de JavaScript -->
+        <script>
+            // Obtiene el elemento del botón de pago por su ID ('checkout')
+            const checkout = document.getElementById('checkout');
+            
+            // Agrega un escucha de evento al hacer clic en el botón
+            checkout.addEventListener('click', async () => {
+                // Realiza una solicitud 'POST' a la ruta '/create-order' en el servidor
+                const response = await fetch('/create-order', {
+                    method: 'POST'
+                });
+                // Parsea la respuesta como JSON
+                const data = await response.json();
+                // Redirige a la URL proporcionada en los datos de respuesta
+                window.location.href = data.links[1].href;
+            });
+        </script>
+    </body>
+</html>
